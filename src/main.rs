@@ -1,11 +1,14 @@
 use std::env;
-use std::ffi::{OsStr};
+use std::ffi::OsStr;
 use std::path::Path;
 use std::path::PathBuf;
 
 fn main() {
+    let len_str = env::var("SHORTHEN_DIR_PATH_LIMIT").unwrap_or(String::from("1"));
+    let length = len_str.parse::<usize>().unwrap_or(1);
+
     env::args().skip(1).for_each(|arg| {
-        let shortened = shorten_path(&arg, 1);
+        let shortened = shorten_path(&arg, length);
         println!("{}", shortened);
     });
 }
@@ -17,7 +20,7 @@ fn shorten_path(arg: &str, length: usize) -> String {
     parent.components().for_each(|component| {
         let name = component.as_os_str().to_str().unwrap_or("");
         let sname = String::from(name);
-        let shoten = if length < sname.len() {
+        let shoten = if length < sname.len() && length != 0 {
             length
         } else {
             sname.len()
