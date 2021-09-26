@@ -15,19 +15,14 @@ fn main() {
 
 fn shorten_path(arg: &str, length: usize) -> String {
     let pth = Path::new(arg);
-    let parent = pth.parent().unwrap_or(Path::new("/"));
+    let parent = pth.parent().unwrap_or(Path::new("."));
     let mut buff = PathBuf::new();
     parent.components().for_each(|component| {
         let name = component.as_os_str().to_str().unwrap_or("");
-        let sname = String::from(name);
-        let shoten = if length < sname.len() && length != 0 {
-            length
-        } else {
-            sname.len()
-        };
-        buff.push(&sname[0..shoten])
+        let shorten = std::cmp::min(length, name.len());
+        buff.push(&name[0..shorten])
     });
 
-    buff.push(pth.file_name().unwrap_or(OsStr::new("")));
+    buff.push(pth.file_name().unwrap_or(OsStr::new(".")));
     return buff.to_str().unwrap_or("").to_string();
 }
