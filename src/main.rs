@@ -134,7 +134,7 @@ mod tests {
         assert_eq!(
             shorten_path(Path::new("~/foo.bar"), 100),
             PathBuf::from("~/foo.bar")
-        );        
+        );
         assert_eq!(
             shorten_path(Path::new("~/foo.bar/baz.txt"), 100),
             PathBuf::from("~/foo.bar/baz.txt")
