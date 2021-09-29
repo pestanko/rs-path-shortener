@@ -8,8 +8,8 @@ fn main() {
         .map(|x| x.parse::<usize>().unwrap_or(1))
         .unwrap_or(1);
     let home_dir = env::var("HOME")
-        .map(|pth| PathBuf::from(pth))
-        .unwrap_or(PathBuf::from("$UNDEFINED"));
+        .map( PathBuf::from)
+        .unwrap_or_else(|_| PathBuf::from("$UNDEFINED"));
 
     for arg in env::args().skip(1).map(PathBuf::from) {
         let path = process_path(&arg, length, &home_dir);

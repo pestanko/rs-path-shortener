@@ -2,7 +2,7 @@ use std::{ffi::OsStr, path::{Path, PathBuf}};
 
 
 pub fn process_path(pth: &Path, length: usize, home_dir: &Path) -> PathBuf {
-    let pth = resolve_home(&pth, &home_dir);
+    let pth = resolve_home(pth, home_dir);
     shorten_path(&pth, length)
 }
 
@@ -27,7 +27,7 @@ pub fn shorten_path(pth: &Path, length: usize) -> PathBuf {
     });
 
     buff.push(pth.file_name().unwrap_or_else(|| OsStr::new("")));
-    return buff;
+    buff
 }
 
 fn resolve_home(arg: &Path, home_dir: &Path) -> PathBuf {
