@@ -8,7 +8,7 @@ fn main() {
         .map(|x| x.parse::<usize>().unwrap_or(1))
         .unwrap_or(1);
     let home_dir = env::var("HOME")
-        .map( PathBuf::from)
+        .map(PathBuf::from)
         .unwrap_or_else(|_| PathBuf::from("$UNDEFINED"));
 
     for arg in env::args().skip(1).map(PathBuf::from) {

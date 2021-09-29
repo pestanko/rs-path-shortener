@@ -1,5 +1,7 @@
-use std::{ffi::OsStr, path::{Path, PathBuf}};
-
+use std::{
+    ffi::OsStr,
+    path::{Path, PathBuf},
+};
 
 pub fn process_path(pth: &Path, length: usize, home_dir: &Path) -> PathBuf {
     let pth = resolve_home(pth, home_dir);
@@ -40,7 +42,7 @@ fn resolve_home(arg: &Path, home_dir: &Path) -> PathBuf {
     }
 }
 
-pub  fn path_to_string(pth: &Path) -> String {
+pub fn path_to_string(pth: &Path) -> String {
     pth.display().to_string()
 }
 
@@ -59,7 +61,10 @@ mod tests {
         );
         assert_eq!(resolve_home(Path::new("/"), home), PathBuf::from("/"));
         assert_eq!(resolve_home(Path::new("."), home), PathBuf::from("."));
-        assert_eq!(resolve_home(Path::new("./flex"), home), PathBuf::from("./flex"));
+        assert_eq!(
+            resolve_home(Path::new("./flex"), home),
+            PathBuf::from("./flex")
+        );
         assert_eq!(
             resolve_home(Path::new("foo/bar.txt"), home),
             PathBuf::from("foo/bar.txt")
@@ -107,7 +112,10 @@ mod tests {
             shorten_path(Path::new("/home/user"), 1),
             PathBuf::from("/h/user")
         );
-        assert_eq!(shorten_path(Path::new("./flex"), 1), PathBuf::from("./flex"));
+        assert_eq!(
+            shorten_path(Path::new("./flex"), 1),
+            PathBuf::from("./flex")
+        );
     }
 
     #[test]
@@ -152,6 +160,9 @@ mod tests {
     #[test]
     fn test_path_to_string() {
         assert_eq!(path_to_string(Path::new("foo.txt")), "foo.txt".to_string());
-        assert_eq!(path_to_string(Path::new("/foo.txt")), "/foo.txt".to_string());
+        assert_eq!(
+            path_to_string(Path::new("/foo.txt")),
+            "/foo.txt".to_string()
+        );
     }
 }
