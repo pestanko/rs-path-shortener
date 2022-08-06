@@ -1,7 +1,8 @@
 #! /bin/bash
 
-INSTALL_DIR="$HOME/.local/bin"
-BUILD_EXEC="target/release/shorten-path"
+EXEC_NAME="shorten-path"
+INSTALL_DIR="$HOME/.local/bin/${EXEC_NAME}"
+BUILD_EXEC="target/release/${EXEC_NAME}"
 
 cargo build --release
 
