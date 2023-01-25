@@ -33,7 +33,7 @@ pub fn shorten_path(pth: &Path, length: usize) -> PathBuf {
 }
 
 fn resolve_home(arg: &Path, home_dir: &Path) -> PathBuf {
-    if let Ok(striped) = arg.strip_prefix(&home_dir) {
+    if let Ok(striped) = arg.strip_prefix(home_dir) {
         let mut buf = PathBuf::from("~");
         buf.push(striped);
         buf
